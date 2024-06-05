@@ -2,24 +2,22 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
-        }
 
-        private void OnCounterClicked(object sender, EventArgs e)
-        {
-            count++;
+            string filePath = "C:\\Users\\rlawo\\OneDrive\\바탕 화면\\hello.txt";
+            string fileContent;
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
+            if (File.Exists(filePath))
+            {
+                fileContent = File.ReadAllText(filePath);
+                TextInput.Text = fileContent; // TextInput Entry에 fileContent의 값을 할당
+            }
             else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            {
+                // 파일이 존재하지 않는 경우에 대한 처리
+            }
         }
     }
-
 }
