@@ -5,18 +5,27 @@
         public MainPage()
         {
             InitializeComponent();
+            PickAndShow();
+        }
 
-            string filePath = "C:\\Users\\rlawo\\OneDrive\\바탕 화면\\hello.txt";
-            string fileContent;
-
-            if (File.Exists(filePath))
+        async void PickAndShow()
+        {
+            try
             {
-                fileContent = File.ReadAllText(filePath);
-                TextInput.Text = fileContent; // TextInput Entry에 fileContent의 값을 할당
+                var result = await FilePicker.PickAsync();
+                if (result != null)
+                {
+                    var stream = await result.OpenReadAsync();
+                    using (var reader = new StreamReader(stream))
+                    {
+                        var fileContent = await reader.ReadToEndAsync();
+                        TextInput.Text = fileContent;
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // 파일이 존재하지 않는 경우에 대한 처리
+                // 파일 선택 중에 오류가 발생한 경우에 대한 처리
             }
         }
     }
