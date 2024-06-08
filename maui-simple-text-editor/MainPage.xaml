@@ -3,15 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="maui_simple_text_editor.MainPage">
 
-    <ScrollView>
+    <ScrollView x:Name="MyScrollView">
         <VerticalStackLayout
             Padding="30,0"
-            Spacing="25">
+            Spacing="25"
+            VerticalOptions="FillAndExpand">
             <Editor
                 x:Name="TextInput"
                 Placeholder="Enter text here"
-                HorizontalOptions="FillAndExpand" />
-
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+            />
+            <Button
+                x:Name="FileOpenButton"
+                Text="Open"
+                Clicked="FileOpenButton_Clicked"
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+            />
         </VerticalStackLayout>
     </ScrollView>
 
